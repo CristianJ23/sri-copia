@@ -1,0 +1,116 @@
+/* src/components/Layout.css */
+
+/* --- SHELL Y ESTRUCTURA BASE (min-h-screen, flex flex-col) --- */
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+/* --- HEADER / NAVBAR --- */
+.app-header {
+    background-color: #1f2937; /* bg-gray-900 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.header-container {
+    max-width: 1280px; /* max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 1rem; /* py-4 px-4 */
+    display: flex;
+    justify-content: space-between; /* justify-between */
+    align-items: center; /* items-center */
+}
+
+.app-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: white;
+}
+
+.title-highlight {
+    color: #60a5fa; /* text-blue-400 */
+}
+
+.app-nav {
+    /* Contenedor de navegación */
+}
+
+.nav-link {
+    color: #d1d5db; /* text-gray-300 */
+    padding: 0.5rem 0.75rem; /* px-3 py-2 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    margin-left: 0.5rem;
+}
+
+.nav-link:hover {
+    color: white; /* hover:text-white */
+    background-color: rgba(255, 255, 255, 0.1); /* Ligero hover de fondo */
+}
+
+/* --- MAIN CONTENT --- */
+.app-main {
+    flex-grow: 1; /* flex-grow */
+    padding-top: 2rem; /* pt-8 */
+    padding-bottom: 4rem; /* pb-16 */
+}
+
+/* --- FOOTER --- */
+.app-footer {
+    background-color: #374151; /* bg-gray-800 */
+    border-top: 1px solid #4b5563; /* border-t border-gray-700 */
+    margin-top: auto; /* mt-auto */
+}
+
+.footer-container {
+    max-width: 1280px; /* max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem; /* py-8 px-4 */
+    text-align: center;
+    color: #9ca3af; /* text-gray-400 */
+}
+
+.footer-text {
+    /* Estilo por defecto */
+}
+
+.footer-links {
+    margin-top: 0.5rem; /* mt-2 */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.footer-link {
+    color: #9ca3af;
+    text-decoration: none;
+    margin: 0 0.5rem; /* mx-2 */
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: white; /* hover:text-white */
+}
+
+.footer-separator {
+    color: #9ca3af;
+}
+
+/* Media Queries para adaptabilidad (sm: y lg:) */
+@media (min-width: 640px) {
+    .header-container, .footer-container {
+        padding-left: 1.5rem; /* sm:px-6 */
+        padding-right: 1.5rem;
+    }
+}
+@media (min-width: 1024px) {
+    .header-container, .footer-container {
+        padding-left: 2rem; /* lg:px-8 */
+        padding-right: 2rem;
+    }
+}

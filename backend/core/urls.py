@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# 🚨 CORRECCIÓN: Usar sintaxis de módulo (puntos)
+from billing.views import PlanListAPIView 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/planes/', PlanListAPIView.as_view(), name='api-planes-list'),
 ]

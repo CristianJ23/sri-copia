@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx (Ejemplo con React Router DOM)
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Importa tus componentes
+import HomePage from './components/HomePage'; // 🚨 Nuevo componente
+import PlanList from './components/PlanList'; // Tu lista de planes existente
+import SuccessPage from './components/SuccessPage';
+import CancelPage from './components/CancelPage';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        {/* 🚨 Redireccionando la Home Page al path raíz (/) */}
+        <Route path="/" element={<HomePage />} /> 
+        
+        {/* La página de planes, para que el botón de Home funcione */}
+        <Route path="/planes" element={<PlanList />} />
+        
+        {/* La URL que Stripe golpea primero */}
+        <Route path="/pago/exitoso" element={<SuccessPage />} />
+        
+        {/* La URL si el usuario cancela en Stripe */}
+        <Route path="/pago/cancelado" element={<CancelPage />} />
+        
+        {/* Puedes añadir una redirección legacy o un alias para /home si el botón en planes.ts te fuerza a usarlo */}
+        <Route path="/home" element={<HomePage />} /> 
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

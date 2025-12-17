@@ -1,0 +1,205 @@
+/* src/components/PlanList.css */
+
+/* --- LAYOUT Y CONTENEDOR PRINCIPAL --- */
+.pricing-section {
+    background-color: #f9fafb; /* bg-gray-50 */
+    padding: 4rem 0; /* py-16 */
+    font-family: Arial, sans-serif;
+}
+
+.pricing-container {
+    max-width: 1280px; /* max-w-7xl */
+    margin: 0 auto; /* mx-auto */
+    padding: 0 1rem; /* px-4 */
+}
+
+/* --- ENCABEZADO --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem; /* mb-12 */
+}
+
+.section-title {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 800; /* font-extrabold */
+    color: #1f2937; /* text-gray-900 */
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    margin-top: 1rem; /* mt-4 */
+    font-size: 1.25rem; /* text-xl */
+    color: #6b7280; /* text-gray-500 */
+}
+
+/* --- GRID DE PLANES --- */
+.plans-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* grid-cols-1 */
+    gap: 2rem; /* gap-8 */
+}
+
+@media (min-width: 640px) { /* sm: */
+    .plans-grid {
+        grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+    }
+}
+
+@media (min-width: 1024px) { /* lg: */
+    .plans-grid {
+        grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+    }
+}
+
+/* --- TARJETA DE PLAN --- */
+.plan-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1.5rem; /* p-6 */
+    background-color: white;
+    border-top: 4px solid #d1d5db; /* border-t-4 border-gray-300 por defecto */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    transition: transform 0.3s ease-in-out; /* transition duration-300 */
+}
+
+.plan-card:hover {
+    transform: scale(1.02); /* hover:scale-[1.02] */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Colores de énfasis (Reemplaza los colores de Tailwind) */
+.plan-premium {
+    border-top-color: #3b82f6; /* border-blue-500 */
+    /* Aquí podrías añadir una sombra de color si lo deseas, pero el box-shadow es complejo en CSS puro */
+}
+
+.plan-pro {
+    border-top-color: #6366f1; /* border-indigo-500 */
+}
+
+/* --- HEADER DE TARJETA --- */
+.plan-header {
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.plan-name {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: #1f2937;
+}
+
+.plan-code {
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280;
+    margin-top: 0.25rem; /* mt-1 */
+    display: block;
+}
+
+/* --- PRECIO --- */
+.plan-price-block {
+    display: flex;
+    align-items: baseline;
+    font-size: 3rem; /* text-6xl */
+    font-weight: 800; /* font-extrabold */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.price-currency {
+    font-size: 1em;
+}
+
+.price-amount {
+    /* El tamaño ya está cubierto por el padre (6xl) */
+}
+
+.price-period {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 500; /* font-medium */
+    color: #6b7280;
+    margin-left: 0.25rem; /* ml-1 */
+}
+
+/* --- DESCRIPCIÓN --- */
+.plan-description {
+    margin-top: 0.25rem; /* mt-1 */
+    font-size: 1rem; /* text-base */
+    color: #6b7280;
+    font-style: italic;
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* --- CARACTERÍSTICAS --- */
+.plan-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Esto simula flex-1 para que el botón siempre esté al fondo */
+    flex-grow: 1; 
+    margin-bottom: 2rem; 
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem; /* space-y-4 */
+    color: #4b5563; /* text-gray-600 */
+}
+
+.feature-icon {
+    color: #10b981; /* text-green-500 */
+    margin-right: 0.75rem; /* mr-3 */
+    margin-top: 0.25rem; /* mt-1 */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.feature-item strong {
+    font-weight: 600;
+}
+
+/* --- BOTÓN DE SUSCRIPCIÓN --- */
+.btn-subscribe {
+    width: 100%; /* w-full */
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    border: 1px solid transparent; /* border-transparent */
+    border-radius: 0.5rem; /* rounded-lg */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500; /* font-medium */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* shadow-md */
+    transition: background-color 0.2s ease-in-out; /* transition duration-200 */
+    cursor: pointer;
+    text-align: center;
+    
+    /* El color por defecto simula el gris de Tailwind */
+    background-color: #4b5563; /* bg-gray-600 */
+}
+
+.btn-subscribe:hover {
+    background-color: #374151; /* hover:bg-gray-700 */
+}
+
+/* Clases específicas para el color del botón (se aplican junto a .plan-premium, etc.) */
+.plan-premium .btn-subscribe {
+    background-color: #2563eb; /* bg-blue-600 */
+}
+.plan-premium .btn-subscribe:hover {
+    background-color: #1d4ed8; /* hover:bg-blue-700 */
+}
+
+.plan-pro .btn-subscribe {
+    background-color: #4f46e5; /* bg-indigo-600 */
+}
+.plan-pro .btn-subscribe:hover {
+    background-color: #4338ca; /* hover:bg-indigo-700 */
+}
+
+.button-icon {
+    margin-right: 0.5rem;
+}
+
+.btn-subscribe.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #6b7280 !important; /* Un gris neutro */
+}

@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-qe)qxjv1kqk+pr8aenr*l6ok-#y$&fotlte+o6ig3gan%4i($x
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000", 
+    "http://127.0.0.1:3000",
+    ]
 
 
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     "users",
     "billing",
     "payments",
+
 ]
 
 MIDDLEWARE = [
@@ -54,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # <-- Debe ser lo más alto posible
 ]
 
 REST_FRAMEWORK = {
@@ -128,3 +134,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+
+# kriss firebase
+# settings.py
+
+# ... otras configuraciones
+
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+# 🚨 ASEGÚRATE DE CAMBIAR LA RUTA
+FIREBASE_CREDENTIALS_PATH = 'C:/sof.ia/SRIcopy/backend/core/firebase-credentials.json' 
+
+# Inicializar Firebase
+if not firebase_admin._apps:
+    try:
+        cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+        firebase_admin.initialize_app(cred)
+        print("Firebase inicializado correctamente.")
+    except Exception as e:
+        print(f"Error al inicializar Firebase: {e}")
+
+# Referencia global a la base de datos de Firestore
+FIRESTORE_DB = firestore.client()

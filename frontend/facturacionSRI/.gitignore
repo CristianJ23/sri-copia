@@ -25,7 +25,10 @@ dist-ssr
 
 # --- Frontend (front) ---
 # Dependencias
-frontend\facturacionSRI/node_modules
+frontend/facturacionSRI/node_modules
+frontend/facturacionSRI/src/firebaseConfig.js
 
 # Entorno virtual específico que mencionaste
 backend/env
+backend/core/firebase-credentials.json
+backend/core/settings.py

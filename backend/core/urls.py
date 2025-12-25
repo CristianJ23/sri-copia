@@ -15,12 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from billing.views import PlanListAPIView, get_firebase_token
 
 # 🚨 CORRECCIÓN: Usar sintaxis de módulo (puntos)
 from billing.views import PlanListAPIView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/planes/', PlanListAPIView.as_view(), name='api-planes-list'),
+    # Ahora funcionará en las dos partes:
+    path('api/v1/planes/', PlanListAPIView.as_view(), name='api-planes'),
+    path('', PlanListAPIView.as_view(), name='facturacion'),
+    path('api/v1/get-firebase-token/', get_firebase_token, name='firebase-token'),
+    path('api-auth/', include('rest_framework.urls')), # Esto habilita /api-auth/login/
 ]

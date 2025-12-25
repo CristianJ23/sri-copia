@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# --- Frontend (front) ---
+# Dependencias
+frontend\facturacionSRI/node_modules
+
+# Entorno virtual específico que mencionaste
+backend/env

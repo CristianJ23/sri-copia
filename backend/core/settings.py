@@ -32,8 +32,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     ]
 
-
-
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_HTTPONLY = False
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,10 +48,10 @@ INSTALLED_APPS = [
     "users",
     "billing",
     "payments",
-
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,11 +59,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # <-- Debe ser lo más alto posible
 ]
 
 REST_FRAMEWORK = {
   "DEFAULT_AUTHENTICATION_CLASSES": (
+      'rest_framework.authentication.SessionAuthentication',
     "rest_framework_simplejwt.authentication.JWTAuthentication",
   ),
 }
@@ -142,20 +142,23 @@ STATIC_URL = 'static/'
 
 # ... otras configuraciones
 
+import os
 import firebase_admin
 from firebase_admin import credentials, firestore
+from google.cloud import firestore as google_firestore # Importación necesaria
 
-# 🚨 ASEGÚRATE DE CAMBIAR LA RUTA
-FIREBASE_CREDENTIALS_PATH = 'C:/sof.ia/SRIcopy/backend/core/firebase-credentials.json' 
+FIREBASE_CREDENTIALS_PATH = 'C:/sof.ia/SRIcopy/backend/core/firebase-credentials.json'
 
-# Inicializar Firebase
+# 1. Inicializar la App de Firebase (para Auth y otras funciones)
 if not firebase_admin._apps:
-    try:
-        cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
-        firebase_admin.initialize_app(cred)
-        print("Firebase inicializado correctamente.")
-    except Exception as e:
-        print(f"Error al inicializar Firebase: {e}")
+    cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+    firebase_admin.initialize_app(cred)
 
-# Referencia global a la base de datos de Firestore
-FIRESTORE_DB = firestore.client()
+# 2. Inicializar el cliente de Firestore apuntando a 'basefactura' usando el JSON
+# Esto evita el error de "DefaultCredentialsError"
+FIRESTORE_DB = google_firestore.Client.from_service_account_json(
+    FIREBASE_CREDENTIALS_PATH,
+    database='basefactura'
+)
+
+print(f"Conectado con éxito a la base de datos")

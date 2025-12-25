@@ -1,23 +1,32 @@
-# billing/serializers.py (Versión Final)
-
 from rest_framework import serializers
 
 class PlanSerializer(serializers.Serializer):
-    # Ya que los nombres en la base de datos son snake_case, NO SE USA 'source'
-    pln_codigo = serializers.CharField(max_length=20) 
-    pln_nombre = serializers.CharField(max_length=100)
-    pln_precio = serializers.DecimalField(max_digits=10, decimal_places=2)
-    pln_duracion_dias = serializers.IntegerField()
-    pln_estado = serializers.CharField(max_length=10)
-    pln_numero_cuentas = serializers.IntegerField()
-
-    # Si lo tiene en la base de datos, perfecto. Si no, usa el valor por defecto
-    pln_descripcion = serializers.CharField(required=False, allow_null=True) 
-
     firebase_id = serializers.CharField(read_only=True)
     
+    # Mapea 'name' de Firebase a 'pln_nombre' en React
+    pln_nombre = serializers.CharField(source='name', max_length=100)
     
-    # 2. 🚨 Serializador para el Checkout (el que probablemente faltaba o estaba mal)
+    # Mapea 'description' de Firebase a 'pln_descripcion' en React
+    pln_descripcion = serializers.CharField(source='description', required=False, allow_null=True)
+    
+    # Mapea el booleano 'active' de Firebase a 'pln_estado'
+    pln_estado = serializers.BooleanField(source='active', default=True)
+
+    # 🚨 AQUÍ ESTABA EL ERROR: 
+    # Como en Firestore lo llamaste 'pln_precio', NO uses source='price'
+    pln_precio = serializers.DecimalField(max_digits=10, decimal_places=2)
+
+    # El ID que generará Stripe (aparecerá pronto en tu base)
+    stripe_price_id = serializers.CharField(required=False, allow_null=True)
+    
+    # Otros campos                                      que tengas en la raíz
+    pln_codigo = serializers.CharField(required=False)
+    pln_duracion_dias = serializers.IntegerField(required=False)
+    pln_numero_cuentas = serializers.IntegerField(required=False)
+    
+
 class CheckoutSerializer(serializers.Serializer):
-    plan_id = serializers.CharField(max_length=100)
-    # Si quieres enviar más datos (ej. user_id, email), añádelos aquí
+    # El ID del PRECIO de Stripe (price_1Q...) es lo más importante aquí
+    stripe_price_id = serializers.CharField(max_length=100)
+    # Opcionalmente, el ID del plan en tu sistema
+    plan_id = serializers.CharField(max_length=100, required=False)
